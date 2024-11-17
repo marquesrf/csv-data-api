@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const result = [];
-  fs.createReadStream("./data/file1.csv")
+  fs.createReadStream("./data/soma-concentrado.csv")
     .pipe(csv())
     .on("data", (data) => result.push(data))
     .on("end", () => {

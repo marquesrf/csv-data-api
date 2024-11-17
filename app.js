@@ -6,10 +6,10 @@ const app = express();
 const PORT = 3000;
 
 // Rotas
-app.use("/api/dt-ext1", dt_ext1Route);
-app.use("/api/dt-ext2", dt_ext2Route);
+app.use("/api/get_soma_concentrado", dt_ext1Route);
+app.use("/api/get_soma_materia_prima", dt_ext2Route);
 
 // Inicia servidor
 app.listen(PORT, () => {
-  console.log("Servidor rodando em http://localhost:${PORT}");
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
