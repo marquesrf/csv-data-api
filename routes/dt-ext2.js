@@ -4,11 +4,25 @@ const csv = require("csv-parser");
 
 const router = express.Router();
 
+const parseNumericFields = (data, numericFields) => {
+  return Object.fromEntries(
+    Object.entries(data).map(([key, value]) =>
+      numericFields.includes(key) ? [key, parseFloat(value)] : [key, value]
+    )
+  );
+};
+
 router.get("/", async (req, res) => {
   const result = [];
+  const numericFields = [
+    "﻿Soma de Matéria-prima (Kg)",
+    "Ordem de Produção",
+    "Ano",
+    "Dia",
+  ];
   fs.createReadStream("./data/soma-materia-prima.csv")
     .pipe(csv())
-    .on("data", (data) => result.push(data))
+    .on("data", (data) => result.push(parseNumericFields(data, numericFields)))
     .on("end", () => {
       res.json(result);
     })
